@@ -13,7 +13,19 @@
         android:theme="@style/Theme.ReportApp"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
+            android:name=".view.AuthorActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.PhoneStatusActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.InternetSearchActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.PhoneNumberManageActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
