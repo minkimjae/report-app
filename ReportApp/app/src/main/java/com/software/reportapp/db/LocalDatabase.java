@@ -8,5 +8,5 @@ import com.software.reportapp.db.entity.Contact;
 
 @Database(entities = {Contact.class}, version = 1)
 public abstract class LocalDatabase extends RoomDatabase {
-    public abstract ContactDao dao;
+    public abstract ContactDao dao();
 }
