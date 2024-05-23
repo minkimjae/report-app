@@ -8,8 +8,30 @@
     tools:context=".view.InternetSearchActivity">
 
     <include layout="@layout/header"
+        android:id="@+id/header"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <com.google.android.material.textfield.MaterialAutoCompleteTextView
+        android:id="@+id/tfUrlSearch"
+        android:layout_width="match_parent"
+        android:layout_marginTop="20dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:textSize="17sp"
+        app:layout_constraintTop_toBottomOf="@+id/header"
+        android:hint="URL 검색"
+        />
+
+    <WebView
+        android:id="@+id/webView"
+        android:layout_width="match_parent"
+        android:layout_height="620dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tfUrlSearch"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
