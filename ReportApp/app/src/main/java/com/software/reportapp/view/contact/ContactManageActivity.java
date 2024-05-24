@@ -1,26 +1,34 @@
-package com.software.reportapp.view;
+package com.software.reportapp.view.contact;
 
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
-import com.software.reportapp.R;
-import com.software.reportapp.databinding.ActivityPhoneNumberManageBinding;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.software.reportapp.databinding.ActivityContactManageBinding;
 
-public class PhoneNumberManageActivity extends AppCompatActivity {
-    private ActivityPhoneNumberManageBinding binding;
+public class ContactManageActivity extends AppCompatActivity {
+    private ActivityContactManageBinding binding;
+    // 하단 floatingAction Button 선언
+    private FloatingActionButton faButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
 
-        binding = ActivityPhoneNumberManageBinding.inflate(getLayoutInflater());
+        binding = ActivityContactManageBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+    }
+
+    private void initView() {
+        faButton = binding.faButton;
+
+        faButton.setOnClickListener(view -> {
+
+        });
     }
 }
