@@ -5,14 +5,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import com.google.android.material.card.MaterialCardView;
 import com.software.reportapp.databinding.ActivityMainBinding;
+import com.software.reportapp.view.contact.ContactManageActivity;
 
 public class MainActivity extends AppCompatActivity {
     // MainActivity viewBonding 선언
@@ -62,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
         cvPhoneNumber.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(PhoneNumberManageActivity.class);
+                startActivity(ContactManageActivity.class);
             }
         });
 
@@ -76,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
         cvPhoneStatus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(PhoneNumberManageActivity.class);
+                startActivity(ContactManageActivity.class);
             }
         });
 
