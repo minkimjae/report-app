@@ -23,7 +23,7 @@
             android:name=".view.InternetSearchActivity"
             android:exported="false" />
         <activity
-            android:name=".view.PhoneNumberManageActivity"
+            android:name=".view.contact.ContactManageActivity"
             android:exported="false" />
         <activity
             android:name=".view.MainActivity"
