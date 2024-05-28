@@ -1,6 +1,7 @@
 package com.software.reportapp.view;
 
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,5 +22,15 @@ public class PhoneStatusActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         binding = ActivityPhoneStatusBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+    }
+
+    private void initView() {
+        binding.header.titleText.setText("스마트폰 상태");
+        binding.header.backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
     }
 }
