@@ -1,115 +1,113 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/background_gray"
+    android:orientation="vertical"
     tools:context=".view.MainActivity">
 
     <com.google.android.material.textview.MaterialTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="35sp"
         android:layout_marginTop="50dp"
-        android:layout_marginLeft="40dp"
-        android:fontFamily="sans-serif-condensed-medium"
-        android:text="Personal diary" />
-
-
-    <LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:layout_marginTop="50dp">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:gravity="center"
-        android:layout_marginBottom="50dp">
-
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/cvPhoneNumber"
-            android:layout_width="150dp"
-            android:layout_height="170dp"
-            android:layout_marginEnd="30dp"
-            app:cardBackgroundColor="@color/card_containter"
-            android:elevation="20dp"
-            android:clickable="true">
-
-            <com.google.android.material.textview.MaterialTextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:textSize="17sp"
-                android:text="@string/main_phone_number_manage"
-                android:fontFamily="sans-serif-condensed-medium"
-                />
-
-        </com.google.android.material.card.MaterialCardView>
-
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/cvInternetSearch"
-            android:layout_width="150dp"
-            android:layout_height="170dp"
-            android:clickable="true">
-            <com.google.android.material.textview.MaterialTextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:textSize="17sp"
-                android:fontFamily="sans-serif-condensed-medium"
-                android:text="@string/main_internet_search"
-                />
-        </com.google.android.material.card.MaterialCardView>
-
-    </LinearLayout>
+        android:fontFamily="sans-serif-condensed-medium"
+        android:text="@string/main_title"
+        android:textSize="35sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_gravity="center"
-        android:gravity="center">
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/cvPhoneStatus"
-            android:layout_width="150dp"
-            android:layout_height="170dp"
-            android:layout_marginEnd="30dp"
-            android:clickable="true">
-            <com.google.android.material.textview.MaterialTextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:textSize="17sp"
-                android:fontFamily="sans-serif-condensed-medium"
-                android:text="@string/main_phone_status"
-                />
-        </com.google.android.material.card.MaterialCardView>
+        android:layout_marginTop="60dp"
+        android:orientation="vertical">
 
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/cvAuthor"
-            android:layout_width="150dp"
-            android:layout_height="170dp"
-            android:clickable="true">
-            <com.google.android.material.textview.MaterialTextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:textSize="17sp"
-                android:fontFamily="sans-serif-condensed-medium"
-                android:text="@string/main_author"
-                />
-        </com.google.android.material.card.MaterialCardView>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="50dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cvPhoneNumber"
+                android:layout_width="150dp"
+                android:layout_height="170dp"
+                android:layout_marginEnd="30dp"
+                android:clickable="true"
+                android:elevation="20dp"
+                app:cardBackgroundColor="@color/card_containter">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fontFamily="sans-serif-condensed-medium"
+                    android:gravity="center"
+                    android:text="@string/main_phone_number_manage"
+                    android:textSize="17sp" />
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cvInternetSearch"
+                android:layout_width="150dp"
+                android:layout_height="170dp"
+                android:clickable="true">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fontFamily="sans-serif-condensed-medium"
+                    android:gravity="center"
+                    android:text="@string/main_internet_search"
+                    android:textSize="17sp" />
+            </com.google.android.material.card.MaterialCardView>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cvPhoneStatus"
+                android:layout_width="150dp"
+                android:layout_height="170dp"
+                android:layout_marginEnd="30dp"
+                android:clickable="true">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fontFamily="sans-serif-condensed-medium"
+                    android:gravity="center"
+                    android:text="@string/main_phone_status"
+                    android:textSize="17sp" />
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cvAuthor"
+                android:layout_width="150dp"
+                android:layout_height="170dp"
+                android:clickable="true">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fontFamily="sans-serif-condensed-medium"
+                    android:gravity="center"
+                    android:text="@string/main_author"
+                    android:textSize="17sp" />
+            </com.google.android.material.card.MaterialCardView>
+
+        </LinearLayout>
 
     </LinearLayout>
-
-</LinearLayout>
-
 
 
 </LinearLayout>
