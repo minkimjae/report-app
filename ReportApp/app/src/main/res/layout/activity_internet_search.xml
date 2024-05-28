@@ -8,7 +8,8 @@
     tools:context=".view.InternetSearchActivity"
     android:fitsSystemWindows="true">
 
-    <include layout="@layout/header"
+    <include
+        layout="@layout/header"
         android:id="@+id/header"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
