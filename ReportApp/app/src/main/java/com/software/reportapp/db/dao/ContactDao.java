@@ -10,10 +10,12 @@ import com.software.reportapp.db.entity.Contact;
 
 import java.util.List;
 
+import io.reactivex.rxjava3.core.Completable;
+
 @Dao
 public interface ContactDao {
     @Insert
-    void insert(Contact contact);
+    Completable insert(Contact contact);
 
     @Query("SELECT id, name FROM Contact")
     LiveData<List<Contact>> getContactList();
