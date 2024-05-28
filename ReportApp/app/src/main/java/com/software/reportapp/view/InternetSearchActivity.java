@@ -55,6 +55,15 @@ public class InternetSearchActivity extends AppCompatActivity {
         // SearchView를 더 이상 아이콘화 할 수 없도록 설정
         searchView.setIconifiedByDefault(false);
 
+        // header 설정
+        binding.header.titleText.setText("인터넷 검색");
+        binding.header.backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
         // 검색 이벤트 리스너 설정
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override

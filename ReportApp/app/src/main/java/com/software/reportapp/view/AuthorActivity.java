@@ -1,6 +1,7 @@
 package com.software.reportapp.view;
 
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,5 +17,15 @@ public class AuthorActivity extends AppCompatActivity {
 
         binding = ActivityAuthorBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+    }
+
+    private void initView() {
+        binding.header.titleText.setText("저자 소개");
+        binding.header.backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
     }
 }
