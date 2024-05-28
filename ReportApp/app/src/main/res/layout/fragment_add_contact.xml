@@ -10,13 +10,14 @@
 
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/nameTextField"
+        android:id="@+id/nameInputLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="12dp"
-        android:hint="성명">
+        android:hint="@string/name">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/nameEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
@@ -24,13 +25,14 @@
 
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/phoneNumberTextField"
+        android:id="@+id/phoneNumberInputLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="12dp"
-        android:hint="전화번호">
+        android:hint="@string/phone_number">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/phoneNumberEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
@@ -38,13 +40,14 @@
 
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/emailTextField"
+        android:id="@+id/emailInputLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="12dp"
-        android:hint="이메일">
+        android:hint="@string/email">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/emailEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
@@ -52,13 +55,14 @@
 
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/workPlaceTextField"
+        android:id="@+id/workPlaceInputLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="12dp"
-        android:hint="직장">
+        android:hint="@string/work_place">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/workPlaceEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
@@ -66,12 +70,13 @@
 
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/titleTextField"
+        android:id="@+id/titleInputLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="직함">
+        android:hint="@string/title">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/titleEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
@@ -86,18 +91,18 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/containedButton"
+            android:id="@+id/saveButton"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_marginRight="20dp"
-            android:text="저장"
+            android:text="@string/save"
             />
 
         <Button
-            android:id="@+id/outlinedButton"
+            android:id="@+id/cancelButton"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:text="취소"
+            android:text="@string/cancle"
             style="?attr/materialButtonOutlinedStyle"
             />
 
