@@ -49,6 +49,10 @@ dependencies {
     implementation(libs.navigation.fragment)
     implementation(libs.navigation.ui)
 
+    // 비동기 처리를 위한 Rxjava
+    implementation(libs.rxjava3)
+    implementation(libs.rxjava3.rxandroid)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
