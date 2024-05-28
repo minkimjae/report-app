@@ -23,7 +23,8 @@ import com.software.reportapp.db.LocalDatabase;
 
 public class ContactManageActivity extends AppCompatActivity {
     private ActivityContactManageBinding binding;
-    private ContactViewModel viewModel;  // viewModel 선언
+    private NavHostFragment navHostFragment;
+    private NavController navController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,17 +33,16 @@ public class ContactManageActivity extends AppCompatActivity {
 
         binding = ActivityContactManageBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        viewModel = new ViewModelProvider(this).get(ContactViewModel.class);
+
+        navHostFragment = (NavHostFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.frameLayout);
+        // NavController 추가
+        navController = navHostFragment.getNavController();
 
         initView();
     }
 
     private void initView() {
-        // NavController 초기화
-        NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.frameLayout);
-        // NavController 선언
-        NavController navController = navHostFragment.getNavController();
         // Fragment 이동 시 header의 title을 변경
         navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
             String title = "";
