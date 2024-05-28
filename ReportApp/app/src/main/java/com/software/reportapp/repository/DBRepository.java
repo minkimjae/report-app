@@ -10,6 +10,8 @@ import com.software.reportapp.db.entity.Contact;
 
 import java.util.List;
 
+import io.reactivex.rxjava3.core.Completable;
+
 public class DBRepository {
     Context contact = App.getContext();
     LocalDatabase db = LocalDatabase.getDatabase(contact);
@@ -17,4 +19,6 @@ public class DBRepository {
     public LiveData<List<Contact>> getAllData() {
         return db.dao().getContactList();
     }
+
+    public Completable insertContact(Contact contact) { return db.dao().insert(contact);}
 }
