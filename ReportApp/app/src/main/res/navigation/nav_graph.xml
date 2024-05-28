@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/contactListFragment"
-        android:name="com.software.reportapp.view.contact.ContactListFragment"
+        android:name="com.software.reportapp.view.contact.list.ContactListFragment"
         android:label="fragment_contact_list"
         tools:layout="@layout/fragment_contact_list" >
         <action
@@ -20,10 +20,10 @@
 
     <fragment
         android:id="@+id/addContactFragment"
-        android:name="com.software.reportapp.view.contact.AddContactFragment"
+        android:name="com.software.reportapp.view.contact.add.AddContactFragment"
         android:label="AddContactFragment" />
     <fragment
         android:id="@+id/contactDetailFragment"
-        android:name="com.software.reportapp.view.contact.ContactDetailFragment"
+        android:name="com.software.reportapp.view.contact.detail.ContactDetailFragment"
         android:label="ContactDetailFragment" />
 </navigation>
