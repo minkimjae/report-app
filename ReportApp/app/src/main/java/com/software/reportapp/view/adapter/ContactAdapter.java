@@ -4,6 +4,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,8 +18,14 @@ import java.util.List;
 public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ViewHolder> {
     private List<Contact> items = new ArrayList<>();
 
-    public ContactAdapter() {
+    private ContactAdapterClickListener listener;
 
+    public ContactAdapter(ContactAdapterClickListener listener) {
+        this.listener = listener;
+    }
+
+    public interface ContactAdapterClickListener {
+        void itemOnclick(Contact contact);
     }
 
     @NonNull
@@ -30,6 +37,12 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        holder.binding.contactListCardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                listener.itemOnclick(items.get(position));
+            }
+        });
         holder.binding.mtrlListItemText.setText(items.get(position).name);
 
     }
