@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
         cvPhoneStatus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(ContactManageActivity.class);
+                startActivity(PhoneStatusActivity.class);
             }
         });
 
