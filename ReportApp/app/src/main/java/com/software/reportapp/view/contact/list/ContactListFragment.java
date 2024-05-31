@@ -75,6 +75,8 @@ public class ContactListFragment extends Fragment implements ContactAdapter.Cont
 
     @Override
     public void itemOnclick(Contact contact) {
-        navController.navigate(R.id.action_contactListFragment_to_contactDetailFragment2);
+        Bundle bundle = new Bundle();
+        bundle.putInt("contactId", contact.getId());
+        navController.navigate(R.id.action_contactListFragment_to_contactDetailFragment2, bundle);
     }
 }
