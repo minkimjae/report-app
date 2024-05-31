@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.PhoneStatusActivity"
+    tools:context=".phonestatus.PhoneStatusActivity"
     android:orientation="vertical"
     android:fitsSystemWindows="true">
 
@@ -17,7 +17,6 @@
         app:layout_constraintEnd_toEndOf="parent" />
 
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp">
@@ -40,6 +39,7 @@
                     android:textAppearance="?attr/textAppearanceHeadline6"
                     />
                 <TextView
+                    android:id="@+id/tvAndroidVersion"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
@@ -53,7 +53,6 @@
     </com.google.android.material.card.MaterialCardView>
 
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/card2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp">
@@ -72,14 +71,87 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="스마트폰 용량"
+                    android:text="WIFI"
                     android:textAppearance="?attr/textAppearanceHeadline6"
                     />
                 <TextView
+                    android:id="@+id/tvWifiOnOff"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="18g"
+                    android:text="ON"
+                    android:textAppearance="?attr/textAppearanceBody2"
+                    android:textColor="?android:attr/textColorSecondary"
+                    />
+
+            </LinearLayout>
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <!-- Title, secondary and supporting text -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="LTE"
+                    android:textAppearance="?attr/textAppearanceHeadline6"
+                    />
+                <TextView
+                    android:id="@+id/tvLteOnOff"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="ON"
+                    android:textAppearance="?attr/textAppearanceBody2"
+                    android:textColor="?android:attr/textColorSecondary"
+                    />
+
+            </LinearLayout>
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <!-- Title, secondary and supporting text -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="SDCARD 용량 (전체용랑/남은용량)"
+                    android:textAppearance="?attr/textAppearanceHeadline6"
+                    />
+                <TextView
+                    android:id="@+id/tvSdCardVolume"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="64GB/20GB"
                     android:textAppearance="?attr/textAppearanceBody2"
                     android:textColor="?android:attr/textColorSecondary"
                     />
@@ -108,50 +180,15 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="인터넷 사용 가능 여부"
+                    android:text="설치한 APP 수/ 동작중인 APP 수"
                     android:textAppearance="?attr/textAppearanceHeadline6"
                     />
                 <TextView
+                    android:id="@+id/tvAppStatus"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="가능"
-                    android:textAppearance="?attr/textAppearanceBody2"
-                    android:textColor="?android:attr/textColorSecondary"
-                    />
-
-            </LinearLayout>
-        </LinearLayout>
-    </com.google.android.material.card.MaterialCardView>
-
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/card3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="16dp">
-
-                <!-- Title, secondary and supporting text -->
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="인터넷 사용 가능 여부"
-                    android:textAppearance="?attr/textAppearanceHeadline6"
-                    />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="가능"
+                    android:text="100/ 2"
                     android:textAppearance="?attr/textAppearanceBody2"
                     android:textColor="?android:attr/textColorSecondary"
                     />
