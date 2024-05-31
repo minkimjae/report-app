@@ -5,6 +5,7 @@ import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.Update;
 
 import com.software.reportapp.db.entity.Contact;
 
@@ -16,6 +17,9 @@ import io.reactivex.rxjava3.core.Completable;
 public interface ContactDao {
     @Insert
     Completable insert(Contact contact);
+
+    @Update
+    Completable update(Contact contact);
 
     @Query("SELECT id, name FROM Contact")
     LiveData<List<Contact>> getContactList();
