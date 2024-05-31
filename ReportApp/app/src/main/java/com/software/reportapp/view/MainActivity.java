@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.card.MaterialCardView;
 import com.software.reportapp.databinding.ActivityMainBinding;
+import com.software.reportapp.phonestatus.PhoneStatusActivity;
 import com.software.reportapp.view.contact.ContactManageActivity;
 
 public class MainActivity extends AppCompatActivity {

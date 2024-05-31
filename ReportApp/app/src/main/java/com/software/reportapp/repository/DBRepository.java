@@ -21,4 +21,8 @@ public class DBRepository {
     }
 
     public Completable insertContact(Contact contact) { return db.dao().insert(contact);}
+
+    public Completable updateContact(Contact contact) { return db.dao().update(contact); }
+
+    public LiveData<Contact> getContactById(int contactId) { return db.dao().getContactById(contactId);}
 }

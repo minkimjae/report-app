@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
+    <!-- 인터넷 검색을 위한 권한 추가 -->
     <uses-permission android:name="android.permission.INTERNET" />
+    <!-- 스마트폰 WIFI/LTE 상태를 가져오기 위한 권한 추가 -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <!-- SDCARD 용량 확인을 위한 권한 추가 -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <!-- 실행중인 앱 수 구하기 위한 권한 추가 -->
+    <uses-permission android:name="android.permission.PACKAGE_USAGE_STATS" tools:ignore="ProtectedPermissions"/>
 
     <application
         android:name=".App"
@@ -18,7 +26,7 @@
             android:name=".view.AuthorActivity"
             android:exported="false" />
         <activity
-            android:name=".view.PhoneStatusActivity"
+            android:name=".phonestatus.PhoneStatusActivity"
             android:exported="false" />
         <activity
             android:name=".view.InternetSearchActivity"
