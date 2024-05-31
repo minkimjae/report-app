@@ -2,6 +2,7 @@ package com.software.reportapp.view.contact.detail;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -41,6 +42,8 @@ public class ContactDetailFragment extends Fragment {
     private Button shareButton;
 
     private NavController navController;
+
+    private Contact contactDetail;
 
     public ContactDetailFragment() {
         // Required empty public constructor
@@ -108,7 +111,7 @@ public class ContactDetailFragment extends Fragment {
         shareButton.setOnClickListener(new View.OnClickListener() { // 공유 버튼 클릭 시
             @Override
             public void onClick(View view) {
-
+                shareContact(contactDetail);
             }
         });
 
@@ -120,6 +123,7 @@ public class ContactDetailFragment extends Fragment {
             viewModel.setLiveDataContact(contactId);
 
             viewModel.getContact().observe(getViewLifecycleOwner(), contact -> {
+                contactDetail = contact;
                 nameInputLayout.getEditText().setText(contact.getName());
                 emailInputLayout.getEditText().setText(contact.getEmail());
                 phoneNumberInputLayout.getEditText().setText(contact.getPhoneNumber());
@@ -128,5 +132,19 @@ public class ContactDetailFragment extends Fragment {
             });
 
         }
+    }
+
+
+    private void shareContact(Contact contact) {
+        // 연락처 정보를 문자열로 변환
+        String contactInfo = "성명: " + contact.getName() + "\n전화번호: "
+                + contact.getPhoneNumber() + "\n이메일: "
+                 + contact.getEmail() + "\n직장: "+contact.getWorkPlace() + "\n직함: "+contact.getTitle();
+
+        // 공유 인텐트 생성
+        Intent shareIntent = new Intent(Intent.ACTION_SEND);
+        shareIntent.setType("text/plain");
+        shareIntent.putExtra(Intent.EXTRA_TEXT, contactInfo);
+        startActivity(Intent.createChooser(shareIntent, "Share Contact via"));
     }
 }
