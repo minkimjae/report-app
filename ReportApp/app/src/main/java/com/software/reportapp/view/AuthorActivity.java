@@ -16,6 +16,9 @@ public class AuthorActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         binding = ActivityAuthorBinding.inflate(getLayoutInflater());
+
+        initView();
+        
         setContentView(binding.getRoot());
     }
 
