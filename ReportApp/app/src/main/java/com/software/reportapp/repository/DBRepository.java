@@ -21,6 +21,9 @@ public class DBRepository {
     }
 
     public Completable insertContact(Contact contact) { return db.dao().insert(contact);}
+    public Completable deleteContact(Contact contact) {
+        return db.dao().deleteContact(contact);
+    }
 
     public Completable updateContact(Contact contact) { return db.dao().update(contact); }
 

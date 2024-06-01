@@ -58,4 +58,36 @@ public class ContactDetailViewModel extends ViewModel {
         return isUpdate;
     }
 
+
+    @SuppressLint("CheckResult")
+    public boolean deleteContact(int contactId) {
+        boolean isUpdate = true;
+
+        Contact deleteContact = new Contact();
+        deleteContact.setId(contactId);
+
+        try {
+            // Rxjava를 통해 비동기 처리
+            repository.deleteContact(deleteContact)
+                    .subscribeOn(Schedulers.io()) // IO 스레드에서 DB 작업 실행, Main 스레드에서 실행 시 오류 발생
+                    .observeOn(AndroidSchedulers.mainThread()) // 결과를 메인 스레드에서 처리
+                    .subscribe(
+                            () -> {
+                                // 삽입 성공 시 처리
+                                Log.d("ContactDetailViewModel", "Delete successful");
+                            },
+                            throwable -> {
+                                // 에러 처리
+                                Log.e("ContactDetailViewModel", "Error Delete contact", throwable);
+                                throw new Exception();
+                            }
+                    );
+        } catch (Exception e) {
+            e.printStackTrace();
+            isUpdate = false;
+        }
+
+        return isUpdate;
+    }
+
 }

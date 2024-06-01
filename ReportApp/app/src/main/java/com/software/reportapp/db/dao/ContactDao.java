@@ -21,6 +21,9 @@ public interface ContactDao {
     @Update
     Completable update(Contact contact);
 
+    @Delete
+    Completable deleteContact(Contact contact);
+
     @Query("SELECT id, name FROM Contact")
     LiveData<List<Contact>> getContactList();
 
