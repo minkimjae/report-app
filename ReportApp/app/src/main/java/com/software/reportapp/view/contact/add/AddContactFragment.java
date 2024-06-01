@@ -3,6 +3,7 @@ package com.software.reportapp.view.contact.add;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,10 +17,13 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+import com.software.reportapp.R;
 import com.software.reportapp.databinding.FragmentAddContactBinding;
 import com.software.reportapp.db.entity.Contact;
+import com.software.reportapp.utill.EmailValidator;
 import com.software.reportapp.view.MainActivity;
 import com.software.reportapp.view.contact.list.ContactListFragment;
 
@@ -80,21 +84,7 @@ public class AddContactFragment extends Fragment {
         cancelButton.setOnClickListener(new View.OnClickListener() { // 취소 버튼 클릭 시
             @Override
             public void onClick(View view) {
-                new AlertDialog.Builder(getContext())
-                        .setTitle("연락처 추가")
-                        .setMessage("취소하시면 모든 내용이 초기화 됩니다. 취소하시겠습니까?")
-                        .setPositiveButton("확인", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                nameInputLayout.getEditText().setText("");
-                                emailInputLayout.getEditText().setText("");
-                                phoneNumberInputLayout.getEditText().setText("");
-                                workPlaceInputLayout.getEditText().setText("");
-                                titleInputLayout.getEditText().setText("");
-                            }
-                        })
-                        .setNegativeButton("취소", null)
-                        .show();
+                showAddCancelDialog();
             }
         });
     }
@@ -124,6 +114,11 @@ public class AddContactFragment extends Fragment {
         if(email.isBlank()) {
             emailInputLayout.setError("이메일을 입력해 주세요");
             isValidate = false;
+        } else { // 이메일 값이 비어있지 않는데 이메일 형식이 안맞을 때
+            if(!EmailValidator.isValidEmail(email)) {
+                emailInputLayout.setError("올바른 이메일 형식이 아닙니다.");
+                isValidate = false;
+            }
         }
 
         if(phoneNumber.isBlank()) {
@@ -160,4 +155,19 @@ public class AddContactFragment extends Fragment {
 
         return viewModel.insertContact(contact);
     }
+
+    private void showAddCancelDialog() {
+        new MaterialAlertDialogBuilder(getContext())
+                .setTitle(getString(R.string.cancel_check_title))
+                .setMessage(getString(R.string.cancel_check_massage))
+                .setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        navController.popBackStack();
+                    }
+                })
+                .setNegativeButton("취소", null)
+                .show();
+    }
+
 }
