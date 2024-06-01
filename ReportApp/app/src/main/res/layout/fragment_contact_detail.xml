@@ -36,7 +36,8 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/phoneNumberEditText"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:inputType="phone"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -51,7 +52,8 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/emailEditText"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:inputType="textEmailAddress"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -107,7 +109,7 @@
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:layout_marginRight="20dp"
-            android:text="공유"
+            android:text="@string/share"
             />
 
         <Button
@@ -115,7 +117,7 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="@string/cancle"
+            android:text="@string/delete"
             style="?attr/materialButtonOutlinedStyle"
             />
 
