@@ -1,6 +1,5 @@
 package com.software.reportapp.view.contact.detail;
 
-import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,19 +9,18 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textfield.TextInputLayout;
 import com.software.reportapp.R;
 import com.software.reportapp.databinding.FragmentContactDetailBinding;
 import com.software.reportapp.db.entity.Contact;
-import com.software.reportapp.view.contact.add.AddContactFragment;
-import com.software.reportapp.view.contact.add.AddContactViewModel;
+import com.software.reportapp.utill.EmailValidator;
 
 import java.util.Objects;
 
@@ -38,7 +36,7 @@ public class ContactDetailFragment extends Fragment {
     private TextInputLayout titleInputLayout;
     private TextInputLayout workPlaceInputLayout;
     private Button saveButton;
-    private Button cancelButton;
+    private Button deleteButton;
     private Button shareButton;
 
     private NavController navController;
@@ -81,29 +79,41 @@ public class ContactDetailFragment extends Fragment {
         saveButton.setOnClickListener(new View.OnClickListener() { // 저장 버튼 클릭 시
             @Override
             public void onClick(View view) {
-                Contact contact = new Contact();
-                contact.setName(Objects.requireNonNull(nameInputLayout.getEditText()).getText().toString());
-                contact.setEmail(Objects.requireNonNull(emailInputLayout.getEditText()).getText().toString());
-                contact.setPhoneNumber(Objects.requireNonNull(phoneNumberInputLayout.getEditText()).getText().toString());
-                contact.setWorkPlace(Objects.requireNonNull(workPlaceInputLayout.getEditText()).getText().toString());
-                contact.setTitle(Objects.requireNonNull(titleInputLayout.getEditText()).getText().toString());
+                if(updateContactValidate()) {
+                    Contact contact = new Contact();
+                    contact.setId(contactId);
+                    contact.setName(Objects.requireNonNull(nameInputLayout.getEditText()).getText().toString());
+                    contact.setEmail(Objects.requireNonNull(emailInputLayout.getEditText()).getText().toString());
+                    contact.setPhoneNumber(Objects.requireNonNull(phoneNumberInputLayout.getEditText()).getText().toString());
+                    contact.setWorkPlace(Objects.requireNonNull(workPlaceInputLayout.getEditText()).getText().toString());
+                    contact.setTitle(Objects.requireNonNull(titleInputLayout.getEditText()).getText().toString());
 
-                boolean updateResult = viewModel.updateContact(contact);
+                    boolean updateResult = viewModel.updateContact(contact);
 
-                if(updateResult) {
-                    Toast.makeText(getContext(), "정보 변경에 성공하였습니다.", Toast.LENGTH_SHORT).show();
-                    navController.navigateUp();
-                } else {
-                    Toast.makeText(getContext(), "정보 변경에 실패하였습니다.", Toast.LENGTH_SHORT).show();
+                    if(updateResult) {
+                        Toast.makeText(getContext(),
+                                        getString(R.string.update_success),
+                                        Toast.LENGTH_SHORT)
+                                .show();
+
+                        navController.navigateUp();
+                    } else {
+                        Toast.makeText(getContext(),
+                                        getString(R.string.update_fail),
+                                        Toast.LENGTH_SHORT)
+                                .show();
+                    }
                 }
+
             }
         });
 
-        cancelButton = binding.cancelButton;
-        cancelButton.setOnClickListener(new View.OnClickListener() { // 취소 버튼 클릭 시
+        deleteButton = binding.deleteButton;
+        deleteButton.setOnClickListener(new View.OnClickListener() { // 삭제 버튼 클릭 시
             @Override
             public void onClick(View view) {
-                navController.navigateUp();
+                showDeleteDialog(getString(R.string.delete_check_title),
+                        getString(R.string.delete_check_message));
             }
         });
 
@@ -122,6 +132,7 @@ public class ContactDetailFragment extends Fragment {
             // viewModel LiveData에 DB 데이터 세팅
             viewModel.setLiveDataContact(contactId);
 
+            // viewModel LiveData 구독 - 데이터 변화가 생길 때를 감지하여 실행
             viewModel.getContact().observe(getViewLifecycleOwner(), contact -> {
                 contactDetail = contact;
                 nameInputLayout.getEditText().setText(contact.getName());
@@ -134,7 +145,6 @@ public class ContactDetailFragment extends Fragment {
         }
     }
 
-
     private void shareContact(Contact contact) {
         // 연락처 정보를 문자열로 변환
         String contactInfo = "성명: " + contact.getName() + "\n전화번호: "
@@ -146,5 +156,85 @@ public class ContactDetailFragment extends Fragment {
         shareIntent.setType("text/plain");
         shareIntent.putExtra(Intent.EXTRA_TEXT, contactInfo);
         startActivity(Intent.createChooser(shareIntent, "Share Contact via"));
+    }
+
+    private void showDeleteDialog(String title, String text) {
+        new MaterialAlertDialogBuilder(getContext())
+                .setTitle(title)
+                .setMessage(text)
+                .setNegativeButton("취소", null)
+                .setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        boolean deleteResult = viewModel.deleteContact(contactId);
+
+                        if(deleteResult) {
+                            Toast.makeText(getContext(),
+                                    getResources().getText(R.string.delete_success),
+                                    Toast.LENGTH_SHORT)
+                                    .show();
+
+                            navController.navigateUp();
+                        } else {
+                            Toast.makeText(getContext(),
+                                    getResources().getText(R.string.delete_fail),
+                                    Toast.LENGTH_SHORT)
+                                    .show();
+                        }
+
+                        dialog.dismiss();
+                    }
+                })
+                .show();
+    }
+
+    private boolean updateContactValidate() {
+        boolean isValidate = true;
+
+        String name = nameInputLayout.getEditText().getText().toString();
+        String email = emailInputLayout.getEditText().getText().toString();
+        String phoneNumber = phoneNumberInputLayout.getEditText().getText().toString();
+        String workPlace = workPlaceInputLayout.getEditText().getText().toString();
+        String title = titleInputLayout.getEditText().getText().toString();
+
+        // editText에 내용을 입력하고 저장 버튼을 다시 클릭 했을 때 표시된 에러 표시를 지워줌
+        nameInputLayout.setErrorEnabled(false);
+        emailInputLayout.setErrorEnabled(false);
+        phoneNumberInputLayout.setErrorEnabled(false);
+        workPlaceInputLayout.setErrorEnabled(false);
+        titleInputLayout.setErrorEnabled(false);
+
+        // 내용 비워져있을 때 에러 표시 isValidate를 false로 리턴하여 다음 동작 못하게 설정한다.
+        if(name.isBlank()) {
+            nameInputLayout.setError("이름을 입력해 주세요");
+            isValidate = false;
+        }
+
+        if(email.isBlank()) {
+            emailInputLayout.setError("이메일을 입력해 주세요");
+            isValidate = false;
+        } else { // 이메일 값이 비어있지 않는데 이메일 형식이 안맞을 때
+            if(!EmailValidator.isValidEmail(email)) {
+                emailInputLayout.setError("올바른 이메일 형식이 아닙니다.");
+                isValidate = false;
+            }
+        }
+
+        if(phoneNumber.isBlank()) {
+            phoneNumberInputLayout.setError("전화번호를 입력해 주세요");
+            isValidate = false;
+        }
+
+        if(workPlace.isBlank()) {
+            workPlaceInputLayout.setError("직장을 입력해 주세요");
+            isValidate = false;
+        }
+
+        if(title.isBlank()) {
+            titleInputLayout.setError("직함을 입력해 주세요");
+            isValidate = false;
+        }
+
+        return isValidate;
     }
 }
