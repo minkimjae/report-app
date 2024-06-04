@@ -1,4 +1,4 @@
-package com.software.reportapp.phonestatus;
+package com.software.reportapp.view.phonestatus;
 
 import android.annotation.SuppressLint;
 import android.app.ActivityManager;

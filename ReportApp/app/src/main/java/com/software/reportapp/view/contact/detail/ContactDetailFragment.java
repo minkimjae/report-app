@@ -44,7 +44,7 @@ public class ContactDetailFragment extends Fragment {
     private Contact contactDetail;
 
     public ContactDetailFragment() {
-       
+
     }
 
 

@@ -26,7 +26,7 @@
             android:name=".view.AuthorActivity"
             android:exported="false" />
         <activity
-            android:name=".phonestatus.PhoneStatusActivity"
+            android:name=".view.phonestatus.PhoneStatusActivity"
             android:exported="false" />
         <activity
             android:name=".view.InternetSearchActivity"
