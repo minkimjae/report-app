@@ -16,20 +16,18 @@ import io.reactivex.rxjava3.core.Completable;
 @Dao
 public interface ContactDao {
     @Insert
-    Completable insert(Contact contact);
+    Completable insert(Contact contact); // 연락처 추가
 
     @Update
-    Completable update(Contact contact);
+    Completable update(Contact contact); // 연락처 수정
 
     @Delete
-    Completable deleteContact(Contact contact);
+    Completable deleteContact(Contact contact); // 연락처 삭제
 
     @Query("SELECT id, name FROM Contact")
-    LiveData<List<Contact>> getContactList();
+    LiveData<List<Contact>> getContactList(); // 연락처 목록
 
     @Query("SELECT * FROM Contact WHERE id = :id")
-    LiveData<Contact> getContactById(int id);
+    LiveData<Contact> getContactById(int id); // 연락처 상세 보기에 사용
 
-    @Delete
-    int delete(Contact contact);
 }

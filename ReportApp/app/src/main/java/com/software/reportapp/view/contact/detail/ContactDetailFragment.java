@@ -44,7 +44,7 @@ public class ContactDetailFragment extends Fragment {
     private Contact contactDetail;
 
     public ContactDetailFragment() {
-        // Required empty public constructor
+       
     }
 
 
@@ -90,14 +90,14 @@ public class ContactDetailFragment extends Fragment {
 
                     boolean updateResult = viewModel.updateContact(contact);
 
-                    if(updateResult) {
+                    if(updateResult) { // 연락처 변경 성공 시
                         Toast.makeText(getContext(),
                                         getString(R.string.update_success),
                                         Toast.LENGTH_SHORT)
                                 .show();
 
                         navController.navigateUp();
-                    } else {
+                    } else { // 연락처 변경 실패 시
                         Toast.makeText(getContext(),
                                         getString(R.string.update_fail),
                                         Toast.LENGTH_SHORT)
@@ -125,8 +125,9 @@ public class ContactDetailFragment extends Fragment {
             }
         });
 
-
+        // 받은 값이 있다면
         if(getArguments() != null) {
+            // 목록에서 넘어온 contactId 추출
             contactId = getArguments().getInt("contactId");
 
             // viewModel LiveData에 DB 데이터 세팅
@@ -158,6 +159,8 @@ public class ContactDetailFragment extends Fragment {
         startActivity(Intent.createChooser(shareIntent, "Share Contact via"));
     }
 
+
+    // 취소 버튼 눌렀을 때 표출되는 다이얼로그
     private void showDeleteDialog(String title, String text) {
         new MaterialAlertDialogBuilder(getContext())
                 .setTitle(title)
@@ -206,32 +209,32 @@ public class ContactDetailFragment extends Fragment {
 
         // 내용 비워져있을 때 에러 표시 isValidate를 false로 리턴하여 다음 동작 못하게 설정한다.
         if(name.isBlank()) {
-            nameInputLayout.setError("이름을 입력해 주세요");
+            nameInputLayout.setError(getString(R.string.name_input_alert));
             isValidate = false;
         }
 
         if(email.isBlank()) {
-            emailInputLayout.setError("이메일을 입력해 주세요");
+            emailInputLayout.setError(getString(R.string.email_input_alert));
             isValidate = false;
         } else { // 이메일 값이 비어있지 않는데 이메일 형식이 안맞을 때
             if(!EmailValidator.isValidEmail(email)) {
-                emailInputLayout.setError("올바른 이메일 형식이 아닙니다.");
+                emailInputLayout.setError(getString(R.string.email_valid_input_alert));
                 isValidate = false;
             }
         }
-
+        // 전화번호 항목 비워져있을 때
         if(phoneNumber.isBlank()) {
-            phoneNumberInputLayout.setError("전화번호를 입력해 주세요");
+            phoneNumberInputLayout.setError(getString(R.string.phone_input_alert));
             isValidate = false;
         }
-
+        // 직장명 비워져있을 때
         if(workPlace.isBlank()) {
-            workPlaceInputLayout.setError("직장을 입력해 주세요");
+            workPlaceInputLayout.setError(getString(R.string.workplace_input_alert));
             isValidate = false;
         }
-
+        // 직함 비워져 있을 때
         if(title.isBlank()) {
-            titleInputLayout.setError("직함을 입력해 주세요");
+            titleInputLayout.setError(getString(R.string.title_input_alert));
             isValidate = false;
         }
 

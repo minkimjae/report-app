@@ -30,7 +30,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:contextClickable="true"
-            android:queryHint="Search here..."/>
+            android:queryHint="URL 검색"/>
 
 
         <androidx.appcompat.widget.AppCompatButton

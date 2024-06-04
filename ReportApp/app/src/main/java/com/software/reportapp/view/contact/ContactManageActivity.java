@@ -31,6 +31,7 @@ public class ContactManageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
 
+        // viewBinding 초기화
         binding = ActivityContactManageBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 

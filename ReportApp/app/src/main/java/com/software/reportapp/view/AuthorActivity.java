@@ -15,14 +15,16 @@ public class AuthorActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        // viewBinding 선언
         binding = ActivityAuthorBinding.inflate(getLayoutInflater());
-
-        initView();
-        
         setContentView(binding.getRoot());
+
+        // view 초기화
+        initView();
     }
 
     private void initView() {
+        // 헤더 세팅
         binding.header.titleText.setText("저자 소개");
         binding.header.backButton.setOnClickListener(new View.OnClickListener() {
             @Override

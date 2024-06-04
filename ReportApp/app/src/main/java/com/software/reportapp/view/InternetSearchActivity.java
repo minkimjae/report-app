@@ -69,6 +69,11 @@ public class InternetSearchActivity extends AppCompatActivity {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 // 검색 버튼이 눌렸을 때 호출
+                // https:// 없을 시 자동으로 앞에 추가
+                if (!query.startsWith("http://") && !query.startsWith("https://")) {
+                    query = "https://" + query;  // "https://"를 자동으로 추가
+                }
+
                 webView.loadUrl(query);
                 return true;  // true를 반환하면 이벤트가 처리되었음을 의미
             }
