@@ -8,16 +8,16 @@ import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
-import android.net.Network;
 import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Environment;
 import android.os.StatFs;
-import android.util.LongSparseArray;
 
 import androidx.lifecycle.ViewModel;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class PhoneStatusViewModel extends ViewModel {
 
@@ -95,10 +95,46 @@ public class PhoneStatusViewModel extends ViewModel {
         return apps.size();  // 설치된 앱의 수 반환
     }
 
-    public int getRunningServicesCount(Context context) {
-        ActivityManager am = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
-        List<ActivityManager.RunningServiceInfo> services = am.getRunningServices(Integer.MAX_VALUE);
-        return services.size();  // 실행 중인 서비스의 수 반환
+    public int getRunningAppCount(Context context) {
+        // UsageStatsManager 선언
+        UsageStatsManager usageStatsManager = (UsageStatsManager) context.getSystemService(Context.USAGE_STATS_SERVICE);
+
+        // 얼마만큼의 시간동안 수집한 앱의 이름을 가져오는지 정하기 (begin ~ end 까지의 앱 이름을 수집한다)
+        final long INTERVAL = 10000;
+        final long end = System.currentTimeMillis();
+        // 1 minute ago
+        final long begin = end - INTERVAL;
+
+        // 중복된 패키지 명을 제외하기 위하 Set에 담는다
+        Set<String> packageNames = new HashSet<>();
+
+        // 수집한 이벤트들을 담기 위한 UsageEvents
+        final UsageEvents usageEvents = usageStatsManager.queryEvents(begin, end);
+
+        // 이벤트가 여러개 있을 경우 반복하여 이벤트 추출
+        while (usageEvents.hasNextEvent()) {
+            // 현재 이벤트를 가져오기
+            UsageEvents.Event event = new UsageEvents.Event();
+            usageEvents.getNextEvent(event);
+
+            // 현재 이벤트가 포그라운드 상태라면 = 현재 화면에 보이는 앱이라면
+            if(isForeGroundEvent(event)) {
+                // Set에 add
+                packageNames.add(event.getPackageName());
+            }
+        }
+
+        return packageNames.size();
     }
+
+    private static boolean isForeGroundEvent(UsageEvents.Event event) {
+        if(event == null) return false;
+
+        if(Build.VERSION.SDK_INT >= 29)
+            return event.getEventType() == UsageEvents.Event.ACTIVITY_RESUMED;
+
+        return event.getEventType() == UsageEvents.Event.MOVE_TO_FOREGROUND;
+    }
+
 
 }
